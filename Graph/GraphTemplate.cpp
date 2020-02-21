@@ -12,10 +12,10 @@ public:
     Edge(int t, T w, int src) : srch(src), to(t), cost(w) {}
 };
 template<typename T>
-using W_Graph = vector<vector<Edge<T>>>;   //重み付きグラフ
-using Graph = vector<vector<int>>;         //通常グラフ
+using W_Graph = std::vector<std::vector<Edge<T>>>;   //重み付きグラフ
+using Graph = std::vector<std::vector<int>>;         //通常グラフ
 template<typename T>
-using Matrix = vector<vector<T>>;          //隣接行列(使わなさそう...)
+using Matrix = std::vector<std::vector<T>>;          //隣接行列(使わなさそう...)
 
 /*===========================================================*/
 //  入力受け取り例
