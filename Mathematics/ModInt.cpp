@@ -73,10 +73,10 @@ public:
     }
     // calc val^n
     constexpr  modint pow(i64 n) noexcept {
-        modint res = 1;
+        modint res = 1, a = val;
         while(n > 0) {
-            if(n & 1) res = res * val;
-            val = val * val;
+            if(n & 1) res = res * a;
+            a = a * a;
             n >>= 1;
         }
         return res;
