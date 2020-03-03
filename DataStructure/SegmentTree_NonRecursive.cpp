@@ -31,40 +31,34 @@ public:
         }
         return func(resl, resr);
     }
-    M operator[](const int &k) const {return t[k+n];}  // mustn't use to input
+    M &operator[](const int &k) &{return t[k+n];}
+    const M &operator[](const int &k) const& {return t[k+n];}
 };
-
 
 
 
 /*  verified on ABC 125 - C -> https://atcoder.jp/contests/abc125/tasks/abc125_c  */
 
 
-long long GCD(long long a, long long b){
-    return (b ? GCD(b, a%b) : a);
-}
+long long GCD(long long a, long long b) { return (b ? GCD(b, a%b) : a); }
 
 signed main(){
     using namespace std;
 
-    // input
+    // input and build
     int n; cin >> n;
-    vector<long long> aa(n);
-    for (int i = 0; i < n; ++i) cin >> aa[i];
-
-    // build
-    SegmentTree<long long> a(aa, [](long long p, long long q){ return GCD(p,q);}, 0LL);
+    SegmentTree<int> a(n, [](int p, int q){ return (q ? GCD(q, p%q) : p);}, 0LL);
+    for(int i = 0; i < n; ++i) cin >> a[i];
     a.build();
 
     // solve
-    long long ans = -1, pp;
-
-    for(int i = 0; i < n; ++i) {
-        if(i==0) pp = a.query(1, n);
-        else if(i==n-1) pp =a.query(0, n-1);
-        else pp = GCD(a.query(0,i), a.query(i+1, n));
-        ans = max(ans, pp);
+    int ans = -1;
+    for (int i = 0; i < n; ++i) {
+        if(i == 0) ans = max(ans, a.query(1, n));
+        else if(i == n-1) ans = max(ans, a.query(0, n-1));
+        else ans = max(ans, GCD(a.query(0,i), a.query(i+1, n)));
     }
+
     // output
     cout << ans << '\n';
 }

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-using namespace std;
 
 /*UnionFind--------------------------*/
 class UnionFind {
@@ -29,7 +28,7 @@ public:
         y = root(y);
         if(x == y) return false;
         //Merge Tech
-        if (siz[x] < siz[y]) swap(x,y);
+        if (siz[x] < siz[y]) std::swap(x,y);
         siz[x] += siz[y];
         parent[y] = x;
         return true;
