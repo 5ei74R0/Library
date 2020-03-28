@@ -40,12 +40,12 @@ const int mod = 1000000007;
 
 /*MAIN==================================================*/
 signed main(){
-    int _StartTime_ = clock();
+    int START_TIME = clock();
     cin.tie(nullptr);
     ios::sync_with_stdio(false);   //cin cout 高速化
     // cout << fixed << setprecision(15);
 
-    
 
-    // printf("ExecutionTime: %d /ms\n",1000*(int)((clock()-_StartTime_)/CLOCKS_PER_SEC));
+
+    // printf("ExecutionTime: %d /ms\n",1000*(int)((clock()-START_TIME)/CLOCKS_PER_SEC));
 }
