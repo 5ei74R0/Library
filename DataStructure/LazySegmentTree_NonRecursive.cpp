@@ -30,10 +30,10 @@ private:
         int s = h, length = 1 << (h-1);
         for(l += n, r += n-1; s > 0; --s, length >>= 1) {
             for(int i = (l >> s); i <= (r >> s); ++i) if(d[i] != M_init) {
-                    apply(i<<1, d[i], length);
-                    apply(i<<1|1, d[i], length);
-                    d[i] = M_init;
-                }
+                apply(i<<1, d[i], length);
+                apply(i<<1|1, d[i], length);
+                d[i] = M_init;
+            }
         }
     }
 public:
@@ -78,7 +78,7 @@ public:
         }
         return func(resl, resr);
     }
-    M operator[](int &k) const { return query(k, k+1); }
+    M operator[](int &k) { return query(k, k+1); }
 };
 
 
