@@ -32,7 +32,7 @@ private:
             for(int i = (l >> s); i <= (r >> s); ++i) if(d[i] != M_init) {
                     apply(i<<1, d[i], length);
                     apply(i<<1|1, d[i], length);
-                    d[i] = 0;
+                    d[i] = M_init;
                 }
         }
     }
