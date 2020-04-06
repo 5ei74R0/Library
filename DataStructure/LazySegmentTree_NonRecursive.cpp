@@ -16,7 +16,8 @@ private:
         else t[p] = func2(d[p], length);
     }
     inline void apply(int p, M value, int length) {
-        t[p] = func2(value, length);
+        t[p] = func2(value, length);  // 区間更新バージョン
+//        t[p] += func2(value, length);  // 区間加算バージョン
         if(p < n) d[p] = value;
     }
     void _build_(int l, int r) {
@@ -30,10 +31,10 @@ private:
         int s = h, length = 1 << (h-1);
         for(l += n, r += n-1; s > 0; --s, length >>= 1) {
             for(int i = (l >> s); i <= (r >> s); ++i) if(d[i] != M_init) {
-                apply(i<<1, d[i], length);
-                apply(i<<1|1, d[i], length);
-                d[i] = M_init;
-            }
+                    apply(i<<1, d[i], length);
+                    apply(i<<1|1, d[i], length);
+                    d[i] = M_init;
+                }
         }
     }
 public:
@@ -90,17 +91,34 @@ signed main(){
     using namespace std;
     int _StartTime_ = clock();
 
-    // input and build
+    // input
     int n; cin >> n;
-    LazySegmentTree<int> a(n, [](int a,int b){ return a+b;}, [](int p, int k){ return p*k;}, 0);
-    for(int i = 0; i < n; i++) {int p; cin >> p; a.set(i,p);}
+
+    // Range Sum Query
+//    LazySegmentTree<int> RSQ(n, [](int a,int b){ return a+b;}, [](int p, int k){ return p*k;}, 0);
+//    for(int i = 0; i < n; i++) {int p; cin >> p; RSQ.set(i,p);}
+//    RSQ.build();
+//
+//    // modify and reply to query
+//    for(int i = 0; i < n; i++) {
+//        RSQ.modify(i, n, i);
+//        for(int i = 0; i < n; ++i ) cout << RSQ[i] << (i==n-1 ? '\n' : ' ');
+//        for(int i = 1; i <= n; ++i) cout << RSQ.query(0,i) << '\n';
+//    }
+
+    // Range Minimum Query
+    LazySegmentTree<int> RMQ(n, [](int a, int b){ return min(a,b);}, [](int a, int k){ return a;}, (int)1e9);
+    for(int i = 0; i < n; ++i) {int p; cin >> p; RMQ.set(i,p);}
+    RMQ.build();
 
     // modify and reply to query
     for(int i = 0; i < n; i++) {
-        a.modify(i, min(n,i+3) , i);
-        for(int i = 0; i < n; ++i ) cout << a[i] << (i==n-1 ? '\n' : ' ');
-        cout << a.query(0,i+1) << '\n';
+        cout << (n-i)*10 << '\n';
+        RMQ.modify(i, n, (n-i)*10);
+        for(int i = 0; i < n; ++i ) cout << RMQ[i] << (i==n-1 ? '\n' : ' ');
+        for(int i = 1; i <= n; ++i) cout << RMQ.query(0,i) << '\n';
     }
+
 
     printf("ExecutionTime : %d /ms\n",1000*(int)((clock()-_StartTime_)/CLOCKS_PER_SEC));
 }
