@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 
 #define debug(x) cout <<"DEBUG"<<" "<< #x << ":" << x << '\n'
-#define rep(i,n) for(int i = 0; i < ((int)(n)); i++)   // 0-indexed昇順
-#define rep1(i,n) for(int i = 1; i <= ((int)(n)); i++) // 1-indexed昇順
-#define rrep(i,n) for(int i = ((int)(n)-1); i >= 0; i--)  // 0-indexed降順
-#define rrep1(i,n) for(int i = ((int)(n)); i >= 1; i--)   // 1-indexed降順
+#define rep(i,n) for(int_fast32_t i = 0; i < ((int_fast32_t)(n)); i++)   // 0-indexed昇順
+#define rep1(i,n) for(int_fast32_t i = 1; i <= ((int_fast32_t)(n)); i++) // 1-indexed昇順
+#define rrep(i,n) for(int_fast32_t i = ((int_fast32_t)(n)-1); i >= 0; i--)  // 0-indexed降順
+#define rrep1(i,n) for(int_fast32_t i = ((int_fast32_t)(n)); i >= 1; i--)   // 1-indexed降順
 #define all(x) (x).begin(),(x).end()
 
 using namespace std;
