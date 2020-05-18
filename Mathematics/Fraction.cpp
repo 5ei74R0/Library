@@ -7,11 +7,12 @@
 //  Operator:
 //      +, -, *, /, +=, -=, *=, /=, =
 //      ==, !=, <, <=, >, >=
+//      ostream<<  : long doubleに変換して出力
 //
 //  Function:
-//      inverse(): 分子分母の入れ替え
-//      reduce(): 約分
-//      err_0_division: 0除算を検知して異常終了
+//      inverse() : 分子分母の入れ替え
+//      reduce()  : 約分
+//      err_0_division  : 0除算を検知して異常終了
 
 #include<bits/stdc++.h>
 
@@ -41,6 +42,9 @@ public:
         i64 tmp = denominator;
         denominator = numerator;
         numerator = tmp;
+    }
+    friend std::ostream &operator<<(std::ostream &os, Fraction &F) {
+        return os << F.convert();
     }
     bool operator == (const Fraction &F) noexcept {
         return numerator == F.numerator && denominator == F.denominator;
@@ -104,6 +108,7 @@ public:
 };
 
 
+
 // verify
 int main () {
     using namespace std;
@@ -121,4 +126,7 @@ int main () {
 
     cout << sum.numerator << '\n';
     cout << sum.denominator << '\n';
+
+    cout << sum << '\n';
+
 }
