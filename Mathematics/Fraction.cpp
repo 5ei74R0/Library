@@ -21,10 +21,10 @@ class Fraction {
 private:
     static i64 inline GCD(i64 a, i64 b) { return (b ? GCD(b, a%b) : a); }
     void inline reduce() noexcept {
-        i64 g = GCD(numerator, denominator);
+        i64 g = GCD(std::abs(numerator), std::abs(denominator));
         numerator /= g;
         denominator /= g;
-        if(numerator >= 0 && denominator < 0) {  // 分母をマイナスにしない
+        if(denominator < 0) {  // 分子+で分母- or 分子分母共に- -> 符号反転
             numerator *= -1, denominator *= -1;
         }
     };
@@ -112,8 +112,8 @@ public:
 // verify
 int main () {
     using namespace std;
-    Fraction a(123, 459), b;
-    b = make_pair(123, 456);
+    Fraction a(-3, 7), b;
+    b = make_pair(-16, -27);
 
     if(a <= b) cout << "a is smaller than b." << '\n';
 
