@@ -1,5 +1,6 @@
 //
 // Created by OtsuKotsu on 2020/05/18.
+// Large Fix by OtsuKotsu on 2020/05/21.
 //
 // Fraction
 // 既約分数クラス
@@ -43,26 +44,29 @@ public:
         denominator = numerator;
         numerator = tmp;
     }
-    friend std::ostream &operator<<(std::ostream &os, Fraction &F) {
-        return os << F.convert();
+    friend std::ostream &operator<<(std::ostream &os, const Fraction &F) {
+        Fraction tmp = F;
+        return os << tmp.convert();
     }
-    bool operator == (const Fraction &F) noexcept {
+    inline bool operator == (const Fraction &F) const noexcept {
         return numerator == F.numerator && denominator == F.denominator;
     }
-    bool operator != (const Fraction &F) noexcept {
-        return numerator != F.numerator || denominator != F.denominator;
+    inline bool operator != (const Fraction &F) const noexcept {
+        return !(*this==F);
     }
-    bool operator < (Fraction F) noexcept {
-        return this->convert() < F.convert();
+    inline bool operator <= (const Fraction &F) const noexcept {
+        Fraction slf = *this, tmp = F;
+        return slf.convert() < tmp.convert() || *this==F;
     }
-    bool operator <= (Fraction F) noexcept {
-        return this->convert() < F.convert() || *this==F;
+    inline bool operator >= (const Fraction &F) const noexcept {
+        Fraction slf = *this, tmp = F;
+        return slf.convert() > tmp.convert() || *this==F;
     }
-    bool operator > (Fraction F) noexcept {
-        return this->convert() > F.convert();
+    inline bool operator < (const Fraction &F) const noexcept {
+        return !(*this>=F);
     }
-    bool operator >= (Fraction F) noexcept {
-        return this->convert() > F.convert() || *this==F;
+    inline bool operator > (const Fraction &F) const noexcept {
+        return !(*this<=F);
     }
     Fraction operator + (const Fraction F) noexcept { return Fraction(*this += F);}
     Fraction operator - (const Fraction F) noexcept { return Fraction(*this) -= F;}
@@ -112,21 +116,47 @@ public:
 // verify
 int main () {
     using namespace std;
-    Fraction a(-3, 7), b;
+
+    // verify construct and input
+    Fraction a(48, -36), b;
     b = make_pair(-16, -27);
 
-    if(a <= b) cout << "a is smaller than b." << '\n';
-
+    printf("\nverify reduce\n");  // verify reduce
     cout << a.numerator << '\n';
     cout << a.denominator << '\n';
     cout << b.numerator << '\n';
     cout << b.denominator << '\n';
 
+    printf("\nverify calculation\n");  // verify calculation
     auto sum = a+b;
-
+    auto diff = a-b;
+    auto multi = a*b;
+    auto div = a/b;
     cout << sum.numerator << '\n';
     cout << sum.denominator << '\n';
+    cout << diff.numerator << '\n';
+    cout << diff.denominator << '\n';
+    cout << multi.numerator << '\n';
+    cout << multi.denominator << '\n';
+    cout << div.numerator << '\n';
+    cout << div.denominator << '\n';
 
-    cout << sum << '\n';
+    printf("\nverify output and compare\n");  // verify output and compare
+    std::priority_queue<Fraction> pq;
+    for (int i = -5; i < 5; ++i) {
+        for (int j = -5; j < 5; ++j) if(j != 0) {
+                pq.push(Fraction(i,j));
+            }
+    }
 
+    while (!pq.empty()) {
+        cout << pq.top() << '\n';
+        pq.pop();
+    }
+
+
+    // !!! verify abort() on 0_division !!!
+//    Fraction zeroParZero;
+//    zeroParZero = make_pair(321, 0);
+//    cout << zeroParZero << '\n';
 }
