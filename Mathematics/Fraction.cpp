@@ -1,6 +1,5 @@
 //
 // Created by OtsuKotsu on 2020/05/18.
-// Large Fix by OtsuKotsu on 2020/05/21.
 //
 // Fraction
 // 既約分数クラス
@@ -29,8 +28,8 @@ private:
             numerator *= -1, denominator *= -1;
         }
     };
-    void inline err_0_division(i64 p = 1) noexcept {
-        if(denominator==0 || p==0) std::abort();
+    void inline err_0_division() noexcept {
+        if(denominator==0) std::abort();
     }
     long double inline convert() noexcept { return (long double)numerator/(long double)denominator; }
 public:
@@ -140,6 +139,13 @@ int main () {
     cout << multi.denominator << '\n';
     cout << div.numerator << '\n';
     cout << div.denominator << '\n';
+
+    printf("\nverify =\n");  // verify =
+    a = b;
+    cout << a.numerator << '\n';
+    cout << a.denominator << '\n';
+    cout << b.numerator << '\n';
+    cout << b.denominator << '\n';
 
     printf("\nverify output and compare\n");  // verify output and compare
     std::priority_queue<Fraction> pq;
