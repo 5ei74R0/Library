@@ -75,9 +75,11 @@ public:
         std::tie(numerator, denominator) = P;
         err_0_division();
         reduce();
+        return *this;
     }
     Fraction &operator = (const Fraction F) noexcept {
         numerator = F.numerator, denominator = F.denominator;
+        return *this;
     }
     Fraction &operator += (const Fraction F) noexcept {
         i64 g = GCD(denominator, F.denominator);
@@ -112,13 +114,13 @@ public:
 
 
 
+
 // verify
 int main () {
     using namespace std;
 
     // verify construct and input
-    Fraction a(48, -36), b;
-    b = make_pair(-16, -27);
+    Fraction a(48, -36), b = {-16, -27};
 
     printf("\nverify reduce\n");  // verify reduce
     cout << a.numerator << '\n';
