@@ -67,10 +67,10 @@ public:
     inline bool operator > (const Fraction &F) const noexcept {
         return !(*this<=F);
     }
-    Fraction operator + (const Fraction F) noexcept { return Fraction(*this += F);}
-    Fraction operator - (const Fraction F) noexcept { return Fraction(*this -= F);}
-    Fraction operator * (const Fraction F) noexcept { return Fraction(*this *= F);}
-    Fraction operator / (const Fraction F) noexcept { return Fraction(*this /= F);}
+    Fraction operator + (const Fraction F) noexcept { return Fraction(*this) += F;}
+    Fraction operator - (const Fraction F) noexcept { return Fraction(*this) -= F;}
+    Fraction operator * (const Fraction F) noexcept { return Fraction(*this) *= F;}
+    Fraction operator / (const Fraction F) noexcept { return Fraction(*this) /= F;}
     Fraction &operator = (const std::pair<i64, i64> P) noexcept {
         std::tie(numerator, denominator) = P;
         err_0_division();
