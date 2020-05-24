@@ -31,7 +31,6 @@ private:
     void inline err_0_division() noexcept {
         if(denominator==0) std::abort();
     }
-    long double inline convert() noexcept { return (long double)numerator/(long double)denominator; }
 public:
     i64 numerator, denominator;
     Fraction(i64 Numerator = 0, i64 Denomirator = 1): numerator(Numerator), denominator(Denomirator) {
@@ -43,6 +42,7 @@ public:
         denominator = numerator;
         numerator = tmp;
     }
+    long double inline convert() noexcept { return (long double)numerator/(long double)denominator; }
     friend std::ostream &operator<<(std::ostream &os, const Fraction &F) {
         Fraction tmp = F;
         return os << tmp.convert();
