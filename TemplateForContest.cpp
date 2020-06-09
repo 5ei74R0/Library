@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 
 #define debug(x) cout <<"DEBUG"<<" "<< #x << ":" << x << '\n'
-#define rep(i,n) for(int_fast32_t i = 0; i < ((int_fast32_t)(n)); i++)   // 0-indexed昇順
-#define rep1(i,n) for(int_fast32_t i = 1; i <= ((int_fast32_t)(n)); i++) // 1-indexed昇順
-#define rrep(i,n) for(int_fast32_t i = ((int_fast32_t)(n)-1); i >= 0; i--)  // 0-indexed降順
-#define rrep1(i,n) for(int_fast32_t i = ((int_fast32_t)(n)); i >= 1; i--)   // 1-indexed降順
+#define rep(i,n) for(int_fast32_t i = 0; i < ((int_fast32_t)(n)); i++)   // 0-indexed up
+#define rep1(i,n) for(int_fast32_t i = 1; i <= ((int_fast32_t)(n)); i++) // 1-indexed up
+#define rrep(i,n) for(int_fast32_t i = ((int_fast32_t)(n)-1); i >= 0; i--)  // 0-indexed down
+#define rrep1(i,n) for(int_fast32_t i = ((int_fast32_t)(n)); i >= 1; i--)   // 1-indexed down
 #define all(x) (x).begin(),(x).end()
 
 using namespace std;
@@ -20,7 +20,7 @@ using ld = long double;
 using vi = vec<int_fast32_t>;
 using vl = vec<int_fast64_t>;
 using vld = vec<ld>;
-using vii = vec<vi>;  // 2次元配列
+using vii = vec<vi>;
 using PII = pair<int_fast32_t, int_fast32_t>;
 
 template<class T>
@@ -45,7 +45,7 @@ const int mod = 1000000007;
 signed main(){
     int START_TIME = clock();
     cin.tie(nullptr);
-    ios::sync_with_stdio(false);   //cin cout 高速化
+    ios::sync_with_stdio(false);
 //    cout << fixed << setprecision(15);
 
 
