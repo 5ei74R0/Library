@@ -14,6 +14,7 @@
  *
  */
 class rollingHash {
+public:
     using U64 = unsigned long long int;
 private:
     const U64 MOD = (1UL<<61) - 1;
