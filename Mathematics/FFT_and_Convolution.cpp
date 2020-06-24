@@ -81,7 +81,7 @@ signed main(){
     size_t n; cin >> n;
     vector<int_fast32_t> a(n), b(n);
     for(int i = 0; i < n; ++i) cin >> a[i] >> b[i];
-    auto ab = convolution(a, b);
+    auto ab = FastFourierTransform::convolution(a, b);
 
     printf("0\n");
     for(int i = 0; i < n*2-1; ++i) printf("%d\n", (int)(ab[i]));

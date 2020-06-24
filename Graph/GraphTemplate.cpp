@@ -1,40 +1,47 @@
 #include <bits/stdc++.h>
-using namespace std;
 
-/*GRAPH_TEMPLATE=============================================*/
+
+/* GRAPH_TEMPLATE ===========================================*/
 template<typename T>
-class Edge {
-public:
-    int src;  // source 状態記録「null = -1」
-    int to;  // 辺の行き先
+struct Edge {
+    int_fast32_t to;  // 辺の行き先
     T cost;  // 辺の重み
-    Edge(int t, T w) : src(-1), to(t), cost(w) {}
-    Edge(int t, T w, int src) : src(src), to(t), cost(w) {}
+    Edge(int_fast32_t t, T w): to(t), cost(w) {}
 };
-template<typename T>
-using W_Graph = std::vector<std::vector<Edge<T>>>;   //重み付きグラフ
-using Graph = std::vector<std::vector<int>>;         //通常グラフ
-template<typename T>
-using Matrix = std::vector<std::vector<T>>;          //隣接行列(使わなさそう...)
 
-/*===========================================================*/
-//  入力受け取り例
-int main(){
-    int n, m; cin >> n >> m;
-    W_Graph<double> W_G(n); //doubleの重みをもった重み付きグラフ
-    Graph G(m);  //普通のグラフ
+template<typename T = int_fast32_t>
+using W_Graph = std::vector<std::vector<Edge<T>>>;  // 重み付きグラフ
+using Graph = std::vector<std::vector<int_fast32_t>>;  // 通常グラフ
+template<typename T = int_fast32_t>
+using Matrix = std::vector<std::vector<T>>;  // 隣接行列(使わなさそう...)
 
-    for(int i = 0; i < n; i++) { // W_Gに入力
+
+
+/* Use ======================================================*/
+signed main() {
+
+    size_t n; std::cin >> n;
+
+    W_Graph<double> weighted_graph(n);  // doubleの重みをもった重み付きグラフ
+    for(int i = 0; i < n; i++) {  // build weighted_graph
         int from, to;
         double cost;
-        cin >> from >> to >> cost;
-        W_G[from].push_back(Edge<double>(to, cost));
+        std::cin >> from >> to >> cost;
+        weighted_graph[from].emplace_back(to, cost);
     }
 
-
-    for(int i = 0; i < m; i++) { // Gに入力
+    Graph graph(n);  // 普通のグラフ
+    for(int i = 0; i < n; i++) { // build graph
         int from, to;
-        cin >> from >> to;
-        G[from].push_back(to);
+        std::cin >> from >> to;
+        graph[from].push_back(to);
+    }
+
+    Matrix<> matrix(n);  // 隣接行列表現
+    for(int i = 0; i < n; ++i) {  // build matrix
+        int u, v;
+        double cost;
+        std::cin >> u >> v >> cost;
+        matrix[u][v] = matrix[v][u] = cost;
     }
 }

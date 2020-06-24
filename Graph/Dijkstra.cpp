@@ -1,43 +1,42 @@
 #include <bits/stdc++.h>
-// using namespace std;
 
-/*GRAPH_TEMPLATE=============================================*/
+
+/* GRAPH_TEMPLATE ===========================================*/
 template<typename T>
-class Edge {
-public:
-    int srch; //searched?探索状態記録「null = -1」
-    int to; //辺の行き先
-    T cost; //辺の重み
-    Edge(int t, T w) : srch(-1), to(t), cost(w) {}
-    Edge(int t, T w, int src) : srch(src), to(t), cost(w) {}
+struct Edge {
+    int_fast32_t to;  // 辺の行き先
+    T cost;  // 辺の重み
+    Edge(int_fast32_t t, T w): to(t), cost(w) {}
 };
-template<typename T>
-using W_Graph = std::vector<std::vector<Edge<T>>>;   //重み付きグラフ
-using Graph = std::vector<std::vector<int>>;         //通常グラフ
-template<typename T>
-using Matrix = std::vector<std::vector<T>>;          //隣接行列(使わなさそう...)
 
-/*Dijkstra(Basic)========================================*/
+template<typename T = int_fast32_t>
+using W_Graph = std::vector<std::vector<Edge<T>>>;  // 重み付きグラフ
+using Graph = std::vector<std::vector<int_fast32_t>>;  // 通常グラフ
+template<typename T = int_fast32_t>
+using Matrix = std::vector<std::vector<T>>;  // 隣接行列(使わなさそう...)
+
+
+/* Dijkstra(Basic) ========================================*/
 template<class T>
-std::vector<T> Dijkstra(W_Graph<T> &G, int s) {
-    const auto infinity = std::numeric_limits<T>::max();
-    std::vector<T> min_dist(G.size(), infinity);
+std::vector<T> Dijkstra(W_Graph<T> &graph, int_fast32_t start_index) {
+    constexpr auto infinity = std::numeric_limits<T>::max();
+    std::vector<T> min_dist(graph.size(), infinity);
 
-    using P = std::pair<T, int>; //pair<DistFromStartingPoint, IndexOfVertex>
+    using P = std::pair<T, int_fast32_t>;  // std::pair< DistFromStartingPoint, IndexOfVertex >
     std::priority_queue<P, std::vector<P>, std::greater<P>> que;
-    min_dist[s] = 0;
-    que.emplace(min_dist[s], s);  //StartingPoint
+    min_dist[start_index] = 0;
+    que.emplace(min_dist[start_index], start_index);  //StartingPoint
 
     while(!que.empty()) {
         T dist;
-        int index;
+        int_fast32_t index;
         tie(dist, index) = que.top();
         que.pop();
         if(dist > min_dist[index]) continue;
 
-        for(auto &edge : G[index]) {
+        for(auto &edge : graph[index]) {
             auto new_dist = dist + edge.cost;
-            //compare the length of each route and change min_dist[edge.to]
+            // compare the length of each route and change min_dist[edge.to]
             if(new_dist >= min_dist[edge.to]) continue;
             min_dist[edge.to] = new_dist;
             que.emplace(min_dist[edge.to], edge.to);
