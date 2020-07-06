@@ -1,19 +1,26 @@
+// renamed by OtsuKotsu on 2020/07/06
+//
+// Class - Binomial -
+// precalculate binomial coefficients
+//
+
+
 #include <bits/stdc++.h>
 
-/*nCr=============================================*/
-class nCr {
+/*Binomial=============================================*/
+class Binomial {
 private:
     const int MAX;
     const int MOD;
     std::vector<long long> fac, finv, inv;
 
 public:
-    nCr(int MAX = 510000, int MOD = 1000000007): MAX(MAX), MOD(MOD)
+    Binomial(int MAX = 510000, int MOD = 1000000007): MAX(MAX), MOD(MOD)
     {
         fac.resize(MAX);
         finv.resize(MAX);
         inv.resize(MAX);
-        // Build'nCr-table'
+        // Build'Binomial-table'
         fac[0] = fac[1] = 1;
         finv[0] = finv[1] = 1;
         inv[1] = 1;
