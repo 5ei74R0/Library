@@ -43,12 +43,12 @@ const int mod = 1000000007;
 
 /*MAIN==================================================*/
 signed main(){
-    int START_TIME = clock();
+    double START_TIME = clock();
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
 //    cout << fixed << setprecision(15);
 
 
 
-    // printf("ExecutionTime: %d /ms\n",1000*(int)((clock()-START_TIME)/CLOCKS_PER_SEC));
+//     printf("ElapsedTime: %5.3f ms\n",1000*((clock()-START_TIME)/CLOCKS_PER_SEC));
 }
