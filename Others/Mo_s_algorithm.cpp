@@ -1,8 +1,10 @@
 //
-// Created by OtsuKotsu on 2020/08/05.
+// modified by OtsuKotsu on 2020/08/06.
 //
 // Mo's algorithm
 // 区間クエリの並べ替え順の保持と区間の伸縮による遷移、実行結果の格納を担う。区間は半開区間[l,r)
+
+#include <bits/stdc++.h>
 
 struct mo_s_algorithm {
     using i32 = int_fast32_t;
@@ -17,12 +19,13 @@ struct mo_s_algorithm {
         for(i32 i = 0; i < query_ranges.size(); ++i) query_order[i] = i;
         std::sort(query_order.begin(), query_order.end(), [&](i32 a, i32 b) {
             if(query_ranges[a].first / sqrt_n != query_ranges[b].first / sqrt_n) return query_ranges[a].first < query_ranges[b].first;
-            return query_ranges[a].second < query_ranges[b].second;
+            else if((query_ranges[a].first / sqrt_n)&1) return query_ranges[a].second < query_ranges[b].second;
+            else return query_ranges[a].second > query_ranges[b].second;
         });
     }
 
     template<class T = i32>
-    void execute(vector<T> &answer_container, T initial_ans) {
+    void execute(std::vector<T> &answer_container, T initial_ans) {
         T current_answer = initial_ans;
         if(answer_container.size() != query_ranges.size()) printf("error! size is not same!");
         for(auto &id : query_order) {
