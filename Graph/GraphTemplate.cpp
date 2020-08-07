@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 
-/* GRAPH_TEMPLATE ===========================================*/
+/* GRAPH_TEMPLATE */
 template<typename T>
 struct Edge {
     int_fast32_t to;  // 辺の行き先
