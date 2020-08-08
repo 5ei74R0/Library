@@ -3,7 +3,7 @@
 //
 // Maximum Flow
 // Ford Fulkerson's Method
-// depedency: ./GraphTemplate.cpp
+// depedency: ../GraphTemplate.cpp
 //
 
 /* GRAPH_TEMPLATE */
