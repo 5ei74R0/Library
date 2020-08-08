@@ -49,7 +49,7 @@ private:
 
     T dfs(i32 v, i32 end_vertex, T flow) {
         if(v == end_vertex) return flow;
-        for(auto e = (Graph[v].begin() + iter[v]); e != Graph[v].end(); ++e) {
+        for(auto e = (Graph[v].begin() + iter[v]); e != Graph[v].end(); ++e, ++iter[v]) {
             T& capacity = e->cost;
             if(capacity > 0 && level[v] < level[e->to]) {
                 T d = dfs(e->to, end_vertex, std::min<T>(capacity, flow));
@@ -81,4 +81,5 @@ public:
             }
         }
     }
+
 };
