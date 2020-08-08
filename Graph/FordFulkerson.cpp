@@ -22,18 +22,19 @@ using Matrix = std::vector<std::vector<T>>;  // 隣接行列(使わなさそう.
 
 
 /* Ford-Fulkerson */
+template<typename T = int_fast32_t>
 class FordFulkerson {
     using i32 = int_fast32_t;
 private:
-    std::vector<std::vector<Edge<i32>>> Graph;
+    std::vector<std::vector<Edge<T>>> Graph;
     std::vector<bool> used;
-    i32 dfs(i32 v, i32 end_vertex, i32 flow) {
+    T dfs(i32 v, i32 end_vertex, T flow) {
         if(v == end_vertex) return flow;
         used[v] = true;
         for (Edge<i32>& e : Graph[v]) {
-            i32& capacity = e.cost;
+            T& capacity = e.cost;
             if(!used[e.to] && capacity > 0) {
-                i32 d = dfs(e.to, end_vertex, std::min(flow, capacity));
+                i32 d = dfs(e.to, end_vertex, std::min<T>(flow, capacity));
                 if(d > 0) {
                     capacity -= d;
                     Graph[e.to].emplace_back(v, d);
@@ -45,14 +46,14 @@ private:
     }
 
 public:
-    explicit FordFulkerson(const std::vector<std::vector<Edge<i32>>>& graph)
+    explicit FordFulkerson(const std::vector<std::vector<Edge<T>>>& graph)
             : Graph(graph), used(graph.size()) {}
 
     i32 execute(i32 start_vertex, i32 end_vertex) {
-        i32 max_flow = 0;
+        T max_flow = 0;
         while (true) {
             used.assign(Graph.size(), false);
-            i32 flow = dfs(start_vertex, end_vertex, std::numeric_limits<i32>::max());
+            T flow = dfs(start_vertex, end_vertex, std::numeric_limits<T>::max());
             if(flow == 0) return max_flow;
             max_flow += flow;
         }
